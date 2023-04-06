@@ -347,7 +347,7 @@ Error generating stack: `+o.message+`
       opacity: 1;
     }
   }
-`,L6={hidden:e=>({x:e?0:-100,y:e?-100:0,opacity:0}),visible:{x:0,y:0,opacity:1}};function A6(){const e=k6(),t=ty();return S.useEffect(()=>{setTimeout(()=>{t.start("visible")},50)},[]),pe(E6,{custom:e,animate:t,initial:"hidden",variants:L6,transition:{duration:.44,type:"spring",stiffness:36},children:[k(T6,{children:k(Ye,{title:"logo"})}),pe(R6,{children:[k(Ui,{to:"/",children:k(Ye,{title:"home"})}),k(Ui,{to:"/discover",children:k(Ye,{title:"discover"})}),k(Ui,{to:"/notifications",children:k(Ye,{title:"notifications"})}),k(Ui,{to:"/menu",children:k(Ye,{title:"menu"})}),k(Ui,{to:"/profile",className:"user-profile",children:k(ny,{children:k("img",{src:"../assets/images/user_profile.png",alt:"User profile"})})})]})]})}const tt=xe.button`
+`,L6={hidden:e=>({x:e?0:-100,y:e?-100:0,opacity:0}),visible:{x:0,y:0,opacity:1}};function A6(){const e=k6(),t=ty();return S.useEffect(()=>{setTimeout(()=>{t.start("visible")},50)},[]),pe(E6,{custom:e,animate:t,initial:"hidden",variants:L6,transition:{duration:.44,type:"spring",stiffness:36},children:[k(T6,{children:k(Ye,{title:"logo"})}),pe(R6,{children:[k(Ui,{to:"/",children:k(Ye,{title:"home"})}),k(Ui,{to:"/discover",children:k(Ye,{title:"discover"})}),k(Ui,{to:"/notifications",children:k(Ye,{title:"notifications"})}),k(Ui,{to:"/menu",children:k(Ye,{title:"menu"})}),k(Ui,{to:"/profile",className:"user-profile",children:k(ny,{children:k("img",{src:"https://joshadamous.github.io/external-fee-test/assets/images/user_profile.png",alt:"User profile"})})})]})]})}const tt=xe.button`
   display: flex;
   justify-content: center;
   align-items: center;
