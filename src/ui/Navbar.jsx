@@ -141,7 +141,10 @@ function Navbar() {
         </NavItem>
         <NavItem to="/profile" className="user-profile">
           <Avatar>
-            <img src="../assets/images/user_profile.png" alt="User profile" />
+            <img
+              src="https://joshadamous.github.io/external-fee-test/assets/images/user_profile.png"
+              alt="User profile"
+            />
           </Avatar>
         </NavItem>
       </Nav>
