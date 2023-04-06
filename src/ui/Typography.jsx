@@ -61,15 +61,15 @@ const StyledTypography = styled.div`
   ${(props) =>
     props.paragraph &&
     css`
-      font-size: 1.25rem;
-      line-height: 1.5rem;
+      font-size: ${clampBuilder(400, 800, 1.125, 1.25)};
+      line-height: ${clampBuilder(400, 800, 1.25, 1.5)};
     `}
 
   ${(props) =>
     props.subtitle &&
     css`
-      font-size: 1rem;
-      line-height: 1.25rem;
+      font-size: ${clampBuilder(400, 800, 0.92, 1)};
+      line-height: ${clampBuilder(400, 800, 1.08, 1.25)};
     `}
 
   ${(props) =>

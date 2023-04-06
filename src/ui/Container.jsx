@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
-  /* height: 100dvh; */
 
   > div:first-child {
     width: 6rem;
@@ -11,6 +10,7 @@ const Container = styled.div`
 
   > div:last-child {
     flex: 1;
+    width: (100% - 6rem);
     height: 100%;
     margin-left: 6rem;
   }
@@ -25,6 +25,7 @@ const Container = styled.div`
     }
 
     > div:last-child {
+      width: 100%;
       margin-left: 0;
       margin-bottom: 6rem;
     }

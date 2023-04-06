@@ -1,108 +1,144 @@
 {
   "feed": [
     {
-      "postId": 1,
+      "id": 1,
       "created": "2023-04-04T15:08:48.611Z",
-      "liked": true,
+      "liked": false,
       "text": "Fresh 35mm lens, straight from Tokyo!",
       "image": "https://images.unsplash.com/photo-1680363470732-4760c2a2a777?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80",
-      "tags": ["photography", "35mm", "tokyo"],
+      "tags": [
+        "photography",
+        "35mm",
+        "tokyo"
+      ],
       "author": {
         "displayName": "Anthony Reyes",
-        "avatar": "https://randomuser.me/api/portraits/men/4.jpg"
+        "avatar": "https://randomuser.me/api/portraits/men/34.jpg"
       }
     },
     {
-      "postId": 2,
+      "id": 2,
       "created": "2023-04-04T14:44:53.588Z",
       "liked": false,
       "text": "Majestic and quiet evenings in Petra.",
       "image": "https://images.unsplash.com/photo-1679238391464-295a8f5597f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80",
-      "tags": ["ancient", "photography", "petra"],
+      "tags": [
+        "ancient",
+        "lens",
+        "petra"
+      ],
       "author": {
         "displayName": "Mark Armstrong",
         "avatar": "https://randomuser.me/api/portraits/men/11.jpg"
       }
     },
     {
-      "postId": 3,
+      "id": 3,
       "created": "2023-04-04T14:27:02.234Z",
       "liked": false,
       "text": "Colors of the calm Mediterranean.",
       "image": "https://images.unsplash.com/photo-1680034200933-09075ddb0843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80",
-      "tags": ["greece", "photography", "citycliff"],
+      "tags": [
+        "greece",
+        "photography",
+        "citycliff"
+      ],
       "author": {
         "displayName": "Shella McBride",
-        "avatar": "https://randomuser.me/api/portraits/women/44.jpg"
+        "avatar": "https://randomuser.me/api/portraits/women/45.jpg"
       }
     },
     {
-      "postId": 4,
+      "id": 4,
       "created": "2023-04-04T14:08:48.611Z",
       "liked": false,
       "text": "Soaking up the glorious Giza rays!",
       "image": "https://images.unsplash.com/photo-1679958256318-1ffdb03bfad3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80",
-      "tags": ["photography", "85mm", "cairo"],
+      "tags": [
+        "photography",
+        "85mm",
+        "cairo"
+      ],
       "author": {
         "displayName": "Jake Fuloni",
         "avatar": "https://randomuser.me/api/portraits/men/12.jpg"
       }
     },
     {
-      "postId": 5,
+      "id": 5,
       "created": "2023-04-04T12:44:53.588Z",
       "liked": false,
       "text": "Night time in London King's Cross.",
       "image": "https://images.unsplash.com/photo-1678365136353-746fec98937b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80",
-      "tags": ["subway", "photography", "london"],
+      "tags": [
+        "subway",
+        "lens",
+        "london"
+      ],
       "author": {
         "displayName": "Diane Abrams",
         "avatar": "https://randomuser.me/api/portraits/women/7.jpg"
       }
     },
     {
-      "postId": 6,
+      "id": 6,
       "created": "2023-04-04T12:27:02.234Z",
       "liked": false,
       "text": "Colorful and 'dry' streets of Spain.",
       "image": "https://images.unsplash.com/photo-1679623591379-2f11ce2937c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80",
-      "tags": ["spain", "photography", "streets"],
+      "tags": [
+        "spain",
+        "photography",
+        "streets"
+      ],
       "author": {
         "displayName": "Nikki Johnson",
         "avatar": "https://randomuser.me/api/portraits/women/36.jpg"
       }
     },
     {
-      "postId": 7,
+      "id": 7,
       "created": "2023-04-04T12:08:48.611Z",
       "liked": false,
       "text": "Exploring the ruins of Francesco Ungaro.",
       "image": "https://images.unsplash.com/photo-1679236629076-e637858b1dd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80",
-      "tags": ["photography", "ruins", "35mm"],
+      "tags": [
+        "photography",
+        "ruins",
+        "35mm"
+      ],
       "author": {
         "displayName": "Jared Alderidge",
         "avatar": "https://randomuser.me/api/portraits/men/31.jpg"
       }
     },
     {
-      "postId": 8,
+      "id": 8,
       "created": "2023-04-04T10:44:53.588Z",
       "liked": false,
       "text": "Beautiful, vibrant Colombian street art.",
       "image": "https://images.unsplash.com/photo-1678885407096-e8cbc7bc1e2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80",
-      "tags": ["colombia", "photography", "streetart"],
+      "tags": [
+        "colombia",
+        "photography",
+        "streetart"
+      ],
       "author": {
         "displayName": "James Berry",
         "avatar": "https://randomuser.me/api/portraits/men/32.jpg"
       }
     },
     {
-      "postId": 9,
+      "id": 9,
       "created": "2023-04-04T10:27:02.234Z",
       "liked": false,
       "text": "Palm trees, old castle on an old Greek isle.",
       "image": "https://images.unsplash.com/photo-1678365131028-3c310aa6c663?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80",
-      "tags": ["greece", "photography", "palmtrees"],
+      "tags": [
+        "greece",
+        "photography",
+        "palmtrees"
+      ],
       "author": {
         "displayName": "Brandy Greyson",
         "avatar": "https://images.unsplash.com/photo-1496081081095-d32308dd6206?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=dd302358c7e18c27c4086e97caf85781"

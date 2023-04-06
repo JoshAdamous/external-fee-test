@@ -1,30 +1,37 @@
-import { useRouteError } from 'react-router-dom';
-import { Layout, Spacer, Button, Typography } from '../ui';
+import { Link, useRouteError } from 'react-router-dom';
+import { useTheme } from 'styled-components';
+import { Layout, PageWrapper, Spacer, Button, Typography, Icon } from '../ui';
 
 function Error() {
   const error = useRouteError();
-  console.error(error);
+  const theme = useTheme();
 
   return (
-    <>
-      <Layout container>
+    <Layout container>
+      <PageWrapper>
         <Spacer gap="xl4" />
 
-        <div>{/* <SectionHeading medium subtitle="Oops!" title={'Something‘s\nnot right'} pullLeft /> */}</div>
-
-        <Spacer gap="lg3" />
-
-        <Typography paragraph>{error.statusText || error.message}</Typography>
+        <Typography heading1 bold style={{ textAlign: 'center' }}>
+          {error.statusText || error.message}
+        </Typography>
 
         <Spacer gap="lg5" />
 
         <Layout centered>
-          <Button text="back home" pathTo="/" />
+          <Button as={Link} primary circle lg to="/">
+            <Icon title="home" fill={theme.offBlack} />
+          </Button>
+
+          <Spacer gap="xs5" />
+
+          <Typography subtitle opacity="0.4">
+            Back home
+          </Typography>
         </Layout>
 
         <Spacer gap="xl1" />
-      </Layout>
-    </>
+      </PageWrapper>
+    </Layout>
   );
 }
 

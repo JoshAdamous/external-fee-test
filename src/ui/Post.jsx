@@ -1,36 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled, { useTheme } from 'styled-components';
 import { Avatar, Typography, Button, Icon, ParallaxContent } from '../ui';
 import { timeAgo } from './utils';
-
-const PostWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  border-radius: 4.5rem;
-  aspect-ratio: 1;
-  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
-  overflow: hidden;
-  cursor: pointer;
-
-  &:is(:hover, :focus) {
-    scale: 1.015;
-  }
-
-  /* &:is(:active) {
-    scale: 0.96;
-  } */
-
-  @media (max-width: 680px) {
-    aspect-ratio: 4/5;
-    border-radius: 4rem;
-  }
-
-  @media (max-width: 480px) {
-    aspect-ratio: 2/3;
-  }
-`;
 
 const PostMedia = styled.div`
   position: absolute;
@@ -43,7 +14,7 @@ const PostMedia = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(rgba(19, 21, 23, 0), rgba(19, 21, 23, 0.6));
+    background-image: linear-gradient(rgba(19, 21, 23, 0), rgba(19, 21, 23, 0.65));
     z-index: 1;
   }
 
@@ -52,10 +23,66 @@ const PostMedia = styled.div`
     height: 120%;
     object-fit: cover;
     border-radius: 4.5rem;
+    transition: all 1.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 
     @media (max-width: 680px) {
       border-radius: 4rem;
     }
+  }
+`;
+
+const PostWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  border-radius: 4.5rem;
+  aspect-ratio: 1;
+  transition: all 0.65s cubic-bezier(0.075, 0.82, 0.165, 1);
+  overflow: hidden;
+  cursor: pointer;
+
+  &:is(:hover, :focus) {
+    scale: 1.015;
+
+    ${PostMedia} {
+      img {
+        scale: 1.075;
+      }
+    }
+  }
+
+  /* &:is(:active) {
+    scale: 0.96;
+  } */
+
+  @media (min-width: 681px) {
+    &:is(:hover, :focus) {
+      ${Button} {
+        &:nth-child(1) {
+          bottom: 13.25rem;
+        }
+
+        &:nth-child(2) {
+          bottom: 7.5rem;
+        }
+
+        &:nth-child(1),
+        &:nth-child(2) {
+          opacity: 1;
+          transition: all 0.33s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 680px) {
+    aspect-ratio: 4/5;
+    border-radius: 4rem;
+  }
+
+  @media (max-width: 480px) {
+    aspect-ratio: 2/3;
   }
 `;
 
@@ -95,11 +122,41 @@ const PostContent = styled.div`
   }
 `;
 
+const Tags = styled.div`
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+`;
+
 const PostActions = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   padding: 1.75rem;
+  justify-content: end;
+
+  ${Button} {
+    transition-duration: 0.88s;
+
+    &:nth-child(3) {
+      transition-duration: 0.44s;
+    }
+  }
+
+  @media (min-width: 681px) {
+    ${Button} {
+      &:nth-child(1),
+      &:nth-child(2) {
+        position: absolute;
+        bottom: 1.75rem;
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        position: relative;
+      }
+    }
+  }
 
   @media (max-width: 680px) {
     gap: 0.5rem;
@@ -111,7 +168,7 @@ const PostActions = styled.div`
     }
   }
 
-  @media (max-width: 360px) {
+  @media (max-width: 480px) {
     gap: 0.75rem;
     padding: 1.75rem;
 
@@ -122,19 +179,9 @@ const PostActions = styled.div`
   }
 `;
 
-const Tags = styled.div`
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-`;
-
-function Post({ post }) {
-  const { postId, created, liked, text, image, tags, author } = post;
+function Post({ post, handleLike }) {
+  const { id, created, liked, text, image, tags, author } = post;
   const theme = useTheme();
-
-  function handleLikePost() {
-    post.liked = true;
-  }
 
   return (
     <PostWrapper>
@@ -151,10 +198,10 @@ function Post({ post }) {
           </Avatar>
 
           <div>
-            <Typography paragraph semibold>
+            <Typography paragraph semibold as="h4">
               {author?.displayName}
             </Typography>
-            <Typography subtitle opacity="0.65">
+            <Typography subtitle opacity="0.65" as="p">
               {timeAgo(created)}
             </Typography>
           </div>
@@ -163,11 +210,13 @@ function Post({ post }) {
 
       <PostBody>
         <PostContent>
-          <Typography lead>{text}</Typography>
+          <Typography lead as="p">
+            {text}
+          </Typography>
 
           <Tags>
             {tags?.map((tag, i) => (
-              <Typography key={tag + i} label="true" semibold opacity="0.65">
+              <Typography key={tag + i} label="true" semibold opacity="0.65" as="p">
                 {'#' + tag}
               </Typography>
             ))}
@@ -184,11 +233,11 @@ function Post({ post }) {
           </Button>
 
           {liked ? (
-            <Button red lg circle onClick={handleLikePost}>
+            <Button red lg circle onClick={() => handleLike(id)}>
               <Icon title="heartFilled" fill={theme.white} />
             </Button>
           ) : (
-            <Button white lg circle onClick={handleLikePost}>
+            <Button white lg circle onClick={() => handleLike(id)}>
               <Icon title="heart" fill={theme.offBlack} />
             </Button>
           )}

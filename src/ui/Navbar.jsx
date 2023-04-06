@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { motion, useAnimation } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import { Icon, Avatar } from './';
+import { useIsMobile } from '../hooks';
 
-const StyledNavbar = styled.div`
+const StyledNavbar = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,13 +49,14 @@ const NavItem = styled(NavLink)`
   }
 
   &:is(:hover, :focus) {
-    scale: 1.05;
+    scale: 1.08;
     opacity: 1;
   }
 
   &.active {
     pointer-events: none;
     opacity: 1;
+    scale: 1 !important;
 
     &:before {
       content: '';
@@ -78,15 +81,47 @@ const NavItem = styled(NavLink)`
   &.user-profile {
     opacity: 0.8;
 
+    &.active {
+      opacity: 1;
+    }
+
     &:is(:hover, :focus) {
       opacity: 1;
     }
   }
 `;
 
+const navbarVariants = {
+  hidden: (isMobile) => ({
+    x: isMobile ? 0 : -100,
+    y: isMobile ? -100 : 0,
+    opacity: 0,
+  }),
+  visible: {
+    x: 0,
+    y: 0,
+    opacity: 1,
+  },
+};
+
 function Navbar() {
+  const isMobile = useIsMobile();
+  const navbarAnimation = useAnimation();
+
+  useEffect(() => {
+    setTimeout(() => {
+      navbarAnimation.start('visible');
+    }, 50);
+  }, []);
+
   return (
-    <StyledNavbar>
+    <StyledNavbar
+      custom={isMobile}
+      animate={navbarAnimation}
+      initial="hidden"
+      variants={navbarVariants}
+      transition={{ duration: 0.44, type: 'spring', stiffness: 36 }}
+    >
       <Logo>
         <Icon title="logo" />
       </Logo>

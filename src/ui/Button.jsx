@@ -6,7 +6,7 @@ const Button = styled.button`
   align-items: center;
   background-color: ${({ bgColor }) => bgColor};
   border: none;
-  transition: all 0.33s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: all 0.44s cubic-bezier(0.075, 0.82, 0.165, 1);
   cursor: pointer;
   overflow: hidden;
 

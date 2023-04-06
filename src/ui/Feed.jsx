@@ -1,45 +1,83 @@
 import React, { useRef, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Loader, Typography, Button, Icon, Stack, Post } from '../ui';
-import { clampBuilder } from './utils';
+import { Loader, PageHeading, Typography, Button, Icon, Stack, Post } from '../ui';
+import { clampBuilder, apiRequest } from './utils';
 
-const StyledFeed = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-inline-size: 37.5rem;
-  inline-size: 100%;
-  margin-inline: auto;
-  padding-bottom: 6rem;
-
-  @media (max-width: 680px) {
-    padding-bottom: 0.5rem;
-  }
+const FeedForm = styled.form`
+  position: relative;
 `;
 
-const FeedHeading = styled.div`
+const FormButton = styled.button`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 3rem;
+  position: absolute;
+  top: -8px;
+  width: 4rem;
+  height: 4rem;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 0;
+  transition: all 0.33s cubic-bezier(0.075, 0.82, 0.165, 1);
+  opacity: 0.65;
+  cursor: pointer;
+  z-index: 2;
+
+  &:is(:hover, :focus) {
+    background-color: rgba(255, 255, 255, 0.12);
+    scale: 1.05;
+    opacity: 1;
+  }
+
+  &:is(:active) {
+    scale: 0.96;
+  }
+
+  &.reset-button {
+    right: 104px;
+  }
+
+  &.search-button {
+    right: 8px;
+  }
 
   @media (max-width: 680px) {
-    padding-left: 2rem;
-    padding-right: 1.5rem;
-    margin-bottom: 1.75rem;
+    width: 3rem;
+    height: 3rem;
+    top: -4px;
+
+    &.reset-button {
+      right: 124px;
+    }
+
+    &.search-button {
+      right: 32px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    top: -8px;
+    &.reset-button {
+      right: 96px;
+    }
+
+    &.search-button {
+      right: 24px;
+    }
   }
 `;
 
 const FeedSearch = styled.input`
   width: 100%;
   font-size: ${clampBuilder(400, 800, 1.5, 2.75)};
-  line-height: ${clampBuilder(400, 800, 2.25, 3)};
+  line-height: 1;
   letter-spacing: -0.025em;
   color: ${({ theme }) => theme.white};
   background-color: transparent;
   border: 0;
   border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+  padding-right: 12rem;
   padding-bottom: 1rem;
   margin-bottom: 4rem;
   transition: all 0.33s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -50,23 +88,18 @@ const FeedSearch = styled.input`
   }
 
   &:is(:active, :focus) {
-    border-color: rgba(255, 255, 255, 0.8);
+    border-color: ${({ theme }) => theme.brand};
   }
 
   @media (max-width: 680px) {
-    width: calc(100% - 3.5rem);
-    margin-left: 2rem;
-    margin-right: 1.5rem;
+    width: calc(100% - 2rem);
+    padding-right: 11rem;
+    margin-inline: 1rem;
     margin-bottom: 2.25rem;
   }
-`;
 
-const HeadingActions = styled.div`
-  display: flex;
-  gap: 1rem;
-
-  @media (max-width: 680px) {
-    gap: 0.75rem;
+  @media (max-width: 480px) {
+    padding-right: 9rem;
   }
 `;
 
@@ -74,52 +107,93 @@ const searchInputVariants = {
   open: {
     opacity: 1,
     height: 'auto',
+    transition: { type: 'spring', stiffness: 80 },
   },
-  collapsed: { opacity: 0, height: 0 },
+  collapsed: { opacity: 0, height: 0, transition: { type: 'spring', stiffness: 36 } },
 };
 
-function Feed({ isLoading, fetchError, posts }) {
+function Feed({
+  posts,
+  setPosts,
+  searchQuery,
+  setSearchQuery,
+  handleReset,
+  handleSearchSubmit,
+  isLoading,
+  fetchError,
+  setFetchError,
+}) {
+  const API_URL = 'http://localhost:3000/feed';
   const theme = useTheme();
   const searchRef = useRef(null);
   const [showSearch, setShowSearch] = useState(false);
-  const [search, setSearch] = useState('');
 
   function handleToggleSearch() {
     !showSearch && searchRef.current.focus();
     setShowSearch(!showSearch);
   }
 
+  const handleLike = async (id) => {
+    const postItems = posts.map((post) => (post.id === id ? { ...post, liked: !post.liked } : post));
+    setPosts(postItems);
+
+    const myPost = postItems.filter((post) => post.id === id);
+    const updateOptions = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ liked: myPost[0].liked }),
+    };
+
+    const reqUrl = `${API_URL}/${id}`;
+    const result = await apiRequest(reqUrl, updateOptions);
+
+    if (result) setFetchError(result);
+  };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleSearchSubmit();
+  }
+
   return (
-    <StyledFeed>
-      <FeedHeading>
-        <Typography heading1 bold as="h1">
-          News
-        </Typography>
+    <>
+      <PageHeading title="Newest">
+        <Button primary lg circle>
+          <Icon title="add" fill={theme.offBlack} />
+        </Button>
 
-        <HeadingActions>
-          <Button primary lg circle>
-            <Icon title="add" fill={theme.offBlack} />
-          </Button>
-
-          <Button outline lg circle onClick={handleToggleSearch}>
-            <Icon title="search" />
-          </Button>
-        </HeadingActions>
-      </FeedHeading>
+        <Button outline lg circle onClick={handleToggleSearch}>
+          <Icon title={showSearch ? 'close' : 'search'} />
+        </Button>
+      </PageHeading>
 
       <motion.div
         variants={searchInputVariants}
         initial={showSearch ? 'open' : 'collapsed'}
         animate={showSearch ? 'open' : 'collapsed'}
       >
-        <form onSubmit={(e) => e.preventDefault()}>
+        <FeedForm onSubmit={handleSubmit}>
           <FeedSearch
             ref={searchRef}
             placeholder="Search..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            role="searchbox"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
-        </form>
+
+          {searchQuery.length >= 1 ? (
+            <FormButton as="div" className="reset-button" onClick={handleReset}>
+              <Icon title="reset" />
+            </FormButton>
+          ) : null}
+
+          <FormButton type="submit" className="search-button">
+            <Icon title="arrowRight" />
+          </FormButton>
+        </FeedForm>
       </motion.div>
 
       {isLoading && (
@@ -127,19 +201,33 @@ function Feed({ isLoading, fetchError, posts }) {
           <Loader />
         </div>
       )}
-      {fetchError && <p style={{ color: 'red' }}>{`Error: ${fetchError}`}</p>}
+
+      {fetchError && (
+        <Typography label="true" semibold as="p" style={{ color: 'red' }}>{`Error: ${fetchError}`}</Typography>
+      )}
+
       <AnimatePresence>
         {!fetchError && !isLoading && (
-          <motion.div initial={{ y: 96, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.44 }}>
+          <motion.div
+            initial={{ y: 96, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.44, type: 'spring', stiffness: 65 }}
+          >
             <Stack gap="sm3">
               {posts?.map((post, i) => (
-                <Post key={i} post={post} />
+                <Post key={i} post={post} handleLike={handleLike} />
               ))}
+
+              {!posts || posts.length === 0 ? (
+                <Typography paragraph medium opacity="0.5">
+                  No posts, try again.
+                </Typography>
+              ) : null}
             </Stack>
           </motion.div>
         )}
       </AnimatePresence>
-    </StyledFeed>
+    </>
   );
 }
 
