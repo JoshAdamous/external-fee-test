@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Layout, PageWrapper, Spacer, Feed } from '../ui';
 
 function Home() {
-  const API_URL = 'http://localhost:3000/feed';
+  const API_URL = 'https://mock-social-media.herokuapp.com/feed';
   const [posts, setPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [fetchError, setFetchError] = useState(null);

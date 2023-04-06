@@ -123,7 +123,7 @@ function Feed({
   fetchError,
   setFetchError,
 }) {
-  const API_URL = 'http://localhost:3000/feed';
+  const API_URL = 'https://mock-social-media.herokuapp.com/feed';
   const theme = useTheme();
   const searchRef = useRef(null);
   const [showSearch, setShowSearch] = useState(false);
