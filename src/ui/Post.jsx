@@ -10,6 +10,10 @@ const PostMedia = styled.div`
   z-index: 1;
   overflow: hidden;
 
+  @media (max-width: 680px) {
+    border-radius: 4rem;
+  }
+
   &:before {
     content: '';
     position: absolute;
@@ -18,6 +22,10 @@ const PostMedia = styled.div`
     border-radius: 4.5rem;
     background-image: linear-gradient(rgba(19, 21, 23, 0), rgba(19, 21, 23, 0.65));
     z-index: 1;
+
+    @media (max-width: 680px) {
+      border-radius: 4rem;
+    }
   }
 
   img {
