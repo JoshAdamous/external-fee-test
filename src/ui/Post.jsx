@@ -6,6 +6,7 @@ import { timeAgo } from './utils';
 const PostMedia = styled.div`
   position: absolute;
   inset: 0;
+  border-radius: 4.5rem;
   z-index: 1;
   overflow: hidden;
 
@@ -14,6 +15,7 @@ const PostMedia = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
+    border-radius: 4.5rem;
     background-image: linear-gradient(rgba(19, 21, 23, 0), rgba(19, 21, 23, 0.65));
     z-index: 1;
   }

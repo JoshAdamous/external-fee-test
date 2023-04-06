@@ -77,6 +77,7 @@ const FeedSearch = styled.input`
   background-color: transparent;
   border: 0;
   border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0;
   padding-right: 12rem;
   padding-bottom: 1rem;
   margin-bottom: 4rem;
