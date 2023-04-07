@@ -865,8 +865,6 @@ table {
 `])));F1(Jp||(Jp=iy(["",""],["",""])),oy);var qp,Jp;const e8=F1`
   ${oy}
   
-  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap');
-
   *,
   *::before,
   *::after {
