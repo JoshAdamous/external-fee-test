@@ -4,8 +4,6 @@ import reset from 'styled-reset';
 export const GlobalStyles = createGlobalStyle`
   ${reset}
   
-  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap');
-
   *,
   *::before,
   *::after {
